@@ -24,14 +24,14 @@ public class MyArrayList<E> {
     }
 
     public void add(E value) {
-        Objects[] temp = new Objects[dataStorage.length + 1];
+        Object[] temp = new Object[dataStorage.length + 1];
         System.arraycopy(dataStorage, 0, temp, 0, dataStorage.length);
         dataStorage = temp;
         dataStorage[dataStorage.length - 1] = value;
     }
 
     public void remove(int index) {
-        Objects[] temp = new Objects[dataStorage.length - 1];
+        Object[] temp = new Object[dataStorage.length - 1];
 
         if (index == dataStorage.length - 1)
             System.arraycopy(dataStorage, 0, temp, 0, dataStorage.length - 1);
@@ -39,7 +39,7 @@ public class MyArrayList<E> {
             System.arraycopy(dataStorage, 1, temp, 0, dataStorage.length - 1);
         } else {
             System.arraycopy(dataStorage, 0, temp, 0, index);
-            System.arraycopy(dataStorage, index, temp, index, dataStorage.length - index);
+            System.arraycopy(dataStorage, index +1, temp, index, dataStorage.length - index -1);
         }
         dataStorage = temp;
     }
@@ -57,4 +57,12 @@ public class MyArrayList<E> {
         return (E) dataStorage[index];
     }
 
+    @Override
+    public String toString() {
+        return Arrays.toString(dataStorage);
+    }
+
+    public E get(int index) {
+        return (E) dataStorage[index];
+    }
 }
