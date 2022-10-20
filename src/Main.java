@@ -1,8 +1,6 @@
 import com.list.MyArrayList;
 import com.list.MyLinkedList;
 
-import java.util.LinkedList;
-
 public class Main {
     public static void main(String[] args) {
 

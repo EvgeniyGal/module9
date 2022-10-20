@@ -1,20 +1,21 @@
-package com.list;
+package com.stack;
 
-import com.collection.List;
+import com.collection.Stack;
+import com.list.MyLinkedList;
 
-public class MyLinkedList<E> implements List<E> {
+public class MyStack<E> implements Stack<E> {
 
     private int size;
     private Node<E> first;
     private Node<E> last;
 
 
-    public MyLinkedList() {
+    public MyStack() {
         this(null);
         this.size = 0;
     }
 
-    public MyLinkedList(E value) {
+    public MyStack(E value) {
         this.first = new Node<E>(value, null, null);
         this.size = 1;
     }
@@ -73,8 +74,10 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public void clear() {
+
         size = 0;
         first = last = null;
+
     }
 
     @Override
@@ -83,16 +86,17 @@ public class MyLinkedList<E> implements List<E> {
     }
 
     @Override
-    public E get(int index) {
+    public E peek() {
+        return last.item;
+    }
 
-        if (index == size - 1) return last.item;
+    @Override
+    public E pop() {
 
-        Node<E> tempNode = first;
+        E item = last.item;
+        remove(size-1);
+        return item;
 
-        for (int i = 0; i < index; i++) {
-            tempNode = tempNode.next;
-        }
-        return tempNode.item;
     }
 
     @Override

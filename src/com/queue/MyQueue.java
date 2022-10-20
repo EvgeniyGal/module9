@@ -1,20 +1,20 @@
-package com.list;
+package com.queue;
 
-import com.collection.List;
+import com.collection.Queue;
 
-public class MyLinkedList<E> implements List<E> {
+public class MyQueue<E> implements Queue<E> {
 
     private int size;
     private Node<E> first;
     private Node<E> last;
 
 
-    public MyLinkedList() {
+    public MyQueue() {
         this(null);
         this.size = 0;
     }
 
-    public MyLinkedList(E value) {
+    public MyQueue(E value) {
         this.first = new Node<E>(value, null, null);
         this.size = 1;
     }
@@ -73,8 +73,10 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public void clear() {
+
         size = 0;
         first = last = null;
+
     }
 
     @Override
@@ -83,31 +85,34 @@ public class MyLinkedList<E> implements List<E> {
     }
 
     @Override
-    public E get(int index) {
+    public E peek() {
+        return first.item;
+    }
 
-        if (index == size - 1) return last.item;
+    @Override
+    public E poll() {
 
-        Node<E> tempNode = first;
+        E item = first.item;
+        remove(0);
+        return item;
 
-        for (int i = 0; i < index; i++) {
-            tempNode = tempNode.next;
-        }
-        return tempNode.item;
     }
 
     @Override
     public String toString() {
 
-        if (size == 0 ) { return ""; }
+        if (size == 0) {
+            return "";
+        }
 
-        StringBuilder stringBuilder = new StringBuilder("");
+        StringBuilder stringBuilder = new StringBuilder();
         Node<E> tempNode = first;
 
         for (int i = 0; i < size; i++) {
             stringBuilder.append(tempNode.item).append(", ");
             tempNode = tempNode.next;
         }
-        return "[" + stringBuilder.substring(0, stringBuilder.length()-2) + "]";
+        return "[" + stringBuilder.substring(0, stringBuilder.length() - 2) + "]";
 
     }
 

@@ -1,12 +1,11 @@
 package com.list;
 
+import com.collection.List;
 import java.util.Arrays;
-import java.util.Objects;
 
-public class MyArrayList<E> {
+public class MyArrayList<E> implements List<E> {
 
     private Object[] dataStorage;
-
 
     public MyArrayList() {
 
@@ -18,51 +17,51 @@ public class MyArrayList<E> {
         this.dataStorage = new Object[]{value};
     }
 
-    public MyArrayList(E[] values) {
+    @Override
+    public void add(E item) {
 
-        this.dataStorage = values;
+        Object[] newDataStorage = new Object[dataStorage.length + 1];
+        System.arraycopy(dataStorage, 0, newDataStorage, 0, dataStorage.length);
+        dataStorage = newDataStorage;
+        dataStorage[dataStorage.length - 1] = item;
+
     }
 
-    public void add(E value) {
-        Object[] temp = new Object[dataStorage.length + 1];
-        System.arraycopy(dataStorage, 0, temp, 0, dataStorage.length);
-        dataStorage = temp;
-        dataStorage[dataStorage.length - 1] = value;
-    }
-
+    @Override
     public void remove(int index) {
-        Object[] temp = new Object[dataStorage.length - 1];
 
-        if (index == dataStorage.length - 1)
-            System.arraycopy(dataStorage, 0, temp, 0, dataStorage.length - 1);
-        else if (index == 0) {
-            System.arraycopy(dataStorage, 1, temp, 0, dataStorage.length - 1);
-        } else {
-            System.arraycopy(dataStorage, 0, temp, 0, index);
-            System.arraycopy(dataStorage, index +1, temp, index, dataStorage.length - index -1);
+        Object[] newDataStorage = new Object[dataStorage.length - 1];
+
+        if (index == dataStorage.length - 1){
+            System.arraycopy(dataStorage, 0, newDataStorage, 0, dataStorage.length - 1);
         }
-        dataStorage = temp;
+        else if (index == 0) {
+            System.arraycopy(dataStorage, 1, newDataStorage, 0, dataStorage.length - 1);
+        } else {
+            System.arraycopy(dataStorage, 0, newDataStorage, 0, index);
+            System.arraycopy(dataStorage, index +1, newDataStorage, index, dataStorage.length - index -1);
+        }
+        dataStorage = newDataStorage;
+
     }
 
-
+    @Override
     public void clear() {
         dataStorage = new Object[0];
     }
 
+    @Override
     public int size() {
         return dataStorage.length;
     }
 
-    public E add(int index) {
+    @Override
+    public E get(int index) {
         return (E) dataStorage[index];
     }
 
     @Override
     public String toString() {
         return Arrays.toString(dataStorage);
-    }
-
-    public E get(int index) {
-        return (E) dataStorage[index];
     }
 }
