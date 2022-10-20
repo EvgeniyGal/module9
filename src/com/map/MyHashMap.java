@@ -30,6 +30,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
                 temp = temp.next;
             }
             temp.next = new Node<>(key, value, null);
+            size++;
         }
     }
 
@@ -42,10 +43,13 @@ public class MyHashMap<K, V> implements Map<K, V> {
         for (int i = 0; i < size; i++) {
             if (temp.key == key && i == 0) {
                 curent = temp.next;
+                size--;
                 return;
             } else {
                 if (temp.key == key) {
                     prev.next = temp.next;
+                    size--;
+                    return;
                 } else {
                     prev = temp;
                     temp = temp.next;
@@ -95,7 +99,7 @@ StringBuilder stringBuilder = new StringBuilder();
         Node<K, V> tempNode = curent;
 
         for (int i = 0; i < size; i++) {
-            stringBuilder.append(tempNode.value).append(", ");
+            stringBuilder.append("(key: ").append(tempNode.key).append(", value: ").append(tempNode.value).append("), ");
             tempNode = tempNode.next;
         }
         return "[" + stringBuilder.substring(0, stringBuilder.length() - 2) + "]";
