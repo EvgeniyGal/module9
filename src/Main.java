@@ -87,6 +87,7 @@ public class Main {
         myHashMap.put(4,"4dfbdf");
         myHashMap.put(5,"5yukyukuy");
         myHashMap.put(6,"6luiuilui");
+        myHashMap.put(6,"rhrhrhrh");
         myHashMap.put(7,"7luiuilui");
         myHashMap.put(8,"8luiuilui");
         System.out.println("myHashMap.size() = " + myHashMap.size());

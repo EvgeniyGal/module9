@@ -21,6 +21,9 @@ public class MyHashMap<K, V> implements Map<K, V> {
 
     @Override
     public void put(K key, V value) {
+
+        if (!isKeyRight(key)) { return; }
+
         if (size == 0) {
             curent = new Node<>(key, value, null);
             size++;
@@ -32,6 +35,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
             temp.next = new Node<>(key, value, null);
             size++;
         }
+
     }
 
     @Override
@@ -95,7 +99,7 @@ public class MyHashMap<K, V> implements Map<K, V> {
             return "";
         }
 
-StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         Node<K, V> tempNode = curent;
 
         for (int i = 0; i < size; i++) {
@@ -106,7 +110,25 @@ StringBuilder stringBuilder = new StringBuilder();
 
     }
 
+    private boolean isKeyRight(K key) {
+
+        Node<K, V> tempNode = curent;
+
+        for (int i = 0; i < size; i++) {
+            if (tempNode.key == key) {
+                System.out.println("Key: " + key + " is already exist, you can't use it!");
+                return false;
+            } else {
+                tempNode = tempNode.next;
+            }
+        }
+
+        return true;
+
+    }
+
     static class Node<K, V> {
+
 
         private K key;
         private V value;
